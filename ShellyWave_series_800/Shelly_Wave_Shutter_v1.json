@@ -1,0 +1,405 @@
+{
+    "description": "Shelly Wave Shutter v1",
+    "parameters": [
+        {
+            "parameterNumber": 1,
+            "label": {
+                "en": "SW1 Switch type"
+            },
+            "description": {
+                "en": "This parameter defines how the Device should treat the switch (which type) connected to the SW (SW1) terminal."
+            },
+            "size": 1,
+            "defaultValue": 0,
+            "format": {
+                "type": "enumerated",
+                "values": [
+                    {
+                        "type": "value",
+                        "value": 0,
+                        "description": {
+                            "en": "momentary switch"
+                        }
+                    },
+                    {
+                        "type": "value",
+                        "value": 1,
+                        "description": {
+                            "en": "toggle switch (contact closed - ON / contact opened - OFF)"
+                        }
+                    },
+                    {
+                        "type": "value",
+                        "value": 2,
+                        "description": {
+                            "en": "toggle switch (device changes status when switch changes status)"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "parameterNumber": 3,
+            "label": {
+                "en": "Inputs orientation"
+            },
+            "description": {
+                "en": "This parameter allows to reverse the operation of switches connected to SW1 and SW2 inputs without changing the wiring."
+            },
+            "size": 1,
+            "defaultValue": 0,
+            "format": {
+                "type": "enumerated",
+                "values": [
+                    {
+                        "type": "value",
+                        "value": 0,
+                        "description": {
+                            "en": "default (SW1 - O1, I2 - O2)"
+                        }
+                    },
+                    {
+                        "type": "value",
+                        "value": 1,
+                        "description": {
+                            "en": "Reversed (SW1 - O2, I2 - O1)"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "parameterNumber": 5,
+            "label": {
+                "en": "Output orientation"
+            },
+            "description": {
+                "en": "This parameter allows to reverse the operation of O1 and O2 without changing the wiring (in case of invalid motor connection) to ensure proper operation."
+            },
+            "size": 1,
+            "defaultValue": 0,
+            "format": {
+                "type": "enumerated",
+                "values": [
+                    {
+                        "type": "value",
+                        "value": 0,
+                        "description": {
+                            "en": "default (O1 - Up, O2 - Down)"
+                        }
+                    },
+                    {
+                        "type": "value",
+                        "value": 1,
+                        "description": {
+                            "en": "reversed (O1 - Down, O2 - Up)"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "parameterNumber": 8,
+            "label": {
+                "en": "Detach O2 output"
+            },
+            "description": {
+                "en": "In this mode the input SW 2 is separated/not changing the state of the output/relay"
+            },
+            "size": 1,
+            "defaultValue": 0,
+            "format": {
+                "type": "enumerated",
+                "values": [
+                    {
+                        "type": "value",
+                        "value": 0,
+                        "description": {
+                            "en": "Not detached"
+                        }
+                    },
+                    {
+                        "type": "value",
+                        "value": 1,
+                        "description": {
+                            "en": "Detached"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "parameterNumber": 40,
+            "label": {
+                "en": "Power report on change - percentage"
+            },
+            "description": {
+                "en": "This parameter determines the minimum change in consumed power that will result in sending new report to the gateway."
+            },
+            "size": 1,
+            "defaultValue": 50,
+            "format": {
+                "type": "enumerated",
+                "values": [
+                    {
+                        "type": "value",
+                        "value": 0,
+                        "description": {
+                            "en": "Power consumption reporting disabled"
+                        }
+                    },
+                    {
+                        "type": "range",
+                        "min": 1,
+                        "max": 100,
+                        "step": 1,
+                        "scale": 1.0,
+                        "unit": "%"
+                    }
+                ]
+            }
+        },
+        {
+            "parameterNumber": 71,
+            "label": {
+                "en": "Operating modes"
+            },
+            "description": {
+                "en": "Choose between the two operating modes. In shutter mode, you can select up/down/stop. In venetian mode, an additional widget/endpoint is displayed in the UI interface, which you can use to control the tilt position of the slats."
+            },
+            "size": 1,
+            "defaultValue": 0,
+            "format": {
+                "type": "enumerated",
+                "values": [
+                    {
+                        "type": "value",
+                        "value": 0,
+                        "description": {
+                            "en": "Shutter mode"
+                        }
+                    },
+                    {
+                        "type": "value",
+                        "value": 1,
+                        "description": {
+                            "en": "Venetian mode with (up/down and slats rotation)"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "parameterNumber": 72,
+            "label": {
+                "en": "Venetian blind slats turning time"
+            },
+            "description": {
+                "en": "Set the time required for the slats to make a full turn (180 degrees)."
+            },
+            "size": 2,
+            "defaultValue": 150,
+            "format": {
+                "type": "enumerated",
+                "values": [
+                    {
+                        "type": "value",
+                        "value": 0,
+                        "description": {
+                            "en": " turning time disabled"
+                        }
+                    },
+                    {
+                        "type": "range",
+                        "min": 1,
+                        "max": 32000,
+                        "step": 1,
+                        "scale": 0.01,
+                        "unit": "sec"
+                    }
+                ]
+            }
+        },
+        {
+            "parameterNumber": 73,
+            "label": {
+                "en": "Slats position after moving"
+            },
+            "description": {
+                "en": "This parameter is used to enable/disable the slats to return to the previously set position, after being activated via the gateway, push-button operation or when the lower limit switch is reached."
+            },
+            "size": 1,
+            "defaultValue": 0,
+            "format": {
+                "type": "enumerated",
+                "values": [
+                    {
+                        "type": "value",
+                        "value": 0,
+                        "description": {
+                            "en": "isable"
+                        }
+                    },
+                    {
+                        "type": "value",
+                        "value": 1,
+                        "description": {
+                            "en": "Enable"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "parameterNumber": 76,
+            "label": {
+                "en": "Motor operation detection"
+            },
+            "description": {
+                "en": "Define the power consumption threshold at the end positions. Based on this value, the Device will know that the shutters reached the limit switches."
+            },
+            "size": 1,
+            "defaultValue": 1,
+            "format": {
+                "type": "enumerated",
+                "values": [
+                    {
+                        "type": "value",
+                        "value": 0,
+                        "description": {
+                            "en": "Disabled: reaching a limit switch will not be detected"
+                        }
+                    },
+                    {
+                        "type": "value",
+                        "value": 1,
+                        "description": {
+                            "en": "Auto power calibration"
+                        }
+                    },
+                    {
+                        "type": "range",
+                        "min": 1,
+                        "max": 255,
+                        "step": 1,
+                        "scale": 1,
+                        "unit": "W"
+                    }
+                ]
+            }
+        },
+        {
+            "parameterNumber": 78,
+            "label": {
+                "en": "Forced shutter calibration"
+            },
+            "description": {
+                "en": "By setting this parameter to value 1 the Device will start executing force calibration procedure. The parameter also reports the calibration status by sending the get parameter value command."
+            },
+            "size": 1,
+            "defaultValue": 3,
+            "format": {
+                "type": "enumerated",
+                "values": [
+                    {
+                        "type": "value",
+                        "value": 1,
+                        "description": {
+                            "en": "start calibration"
+                        }
+                    },
+                    {
+                        "type": "value",
+                        "value": 2,
+                        "description": {
+                            "en": "device is calibrated (read only)"
+                        }
+                    },
+                    {
+                        "type": "value",
+                        "value": 3,
+                        "description": {
+                            "en": "device is not calibrated (read only)"
+                        }
+                    },
+                    {
+                        "type": "value",
+                        "value": 2,
+                        "description": {
+                            "en": "calibration error (read only)"
+                        }
+                    }
+                ]
+            }
+        },        
+        {
+            "parameterNumber": 80,
+            "label": {
+                "en": "Motor stop delay after limit switch detection"
+            },
+            "description": {
+                "en": "This parameter defines the delay time for the motor to turn off, after reaching the limit switch."
+            },
+            "size": 1,
+            "defaultValue": 10,
+            "format": {
+                "type": "range",
+                "min": 1,
+                "max": 127,
+                "step": 0.1,
+                "scale": 1,
+                "unit": "sec"
+            }
+        },
+        {
+            "parameterNumber": 76,
+            "label": {
+                "en": "Motor operation detection"
+            },
+            "description": {
+                "en": "Define the power consumption threshold at the end positions. Based on this value, the Device will know that the shutters reached the limit switches."
+            },
+            "size": 1,
+            "defaultValue": 30,
+            "format": {
+                "type": "enumerated",
+                "values": [
+                    {
+                        "type": "value",
+                        "value": 0,
+                        "description": {
+                            "en": "time is set automatically"
+                        }
+                    },
+                    {
+                        "type": "range",
+                        "min": 3,
+                        "max": 50,
+                        "step": 1,
+                        "scale": 0.1,
+                        "unit": "sec"
+                    }
+                ]
+            }
+        },
+        {
+            "parameterNumber": 91,
+            "label": {
+                "en": "Max. Motor moving time"
+            },
+            "description": {
+                "en": "When the shutter is not calibrated (or the motor is not equipped with a limit switch), this parameter defines the movement time of the motor."
+            },
+            "size": 2,
+            "defaultValue": 12000,
+            "format": {
+                "type": "range",
+                "min": 1,
+                "max": 32000,
+                "step": 0.01,
+                "scale": 1,
+                "unit": "sec"
+            }
+        }
+    ]
+}
